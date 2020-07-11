@@ -3,6 +3,12 @@
 This repository is my local storage of things i've done with jupyter.
 For a great howto, see https://berthub.eu/articles/posts/from-gnuplot-to-matplotlib-pandas/
 
+I start this with:
+```
+jupyter notebook --ip=192.168.1.100 --port 9999 --no-browser --notebook-dir=<directory of notebook>
+```
+
+
 ## What's in here?
 
 ### Pingstats
