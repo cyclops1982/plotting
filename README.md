@@ -5,7 +5,16 @@ For a great howto, see https://berthub.eu/articles/posts/from-gnuplot-to-matplot
 
 I start this with:
 ```
+source bin/activate
 jupyter notebook --ip=192.168.1.100 --port 9999 --no-browser --notebook-dir=<directory of notebook>
+```
+
+How i install this:
+```
+python3.7 -m virtualenv -p python3.7 plotting
+cd plotting/
+source bin/activate
+python -m pip install jupyter pandas matplotlib numpy
 ```
 
 
