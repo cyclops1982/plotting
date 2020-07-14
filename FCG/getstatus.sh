@@ -32,6 +32,6 @@ do
 		echo ${TSTAMP}, ${URL[$index]}, $TIMING
 		echo ${TSTAMP}, ${URL[$index]}, $TIMING >> ${OUTPUT}
 	done
-	sleep 3
+	sleep $(( $RANDOM % 300 + 30 ))
 done
 
