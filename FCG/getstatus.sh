@@ -7,7 +7,6 @@ CARID[0]="0b1ddf5e-3094-46f6-a172-33ce342ee463"
 CARID[1]="c7b66665-de6c-41b4-b51f-6a41dbc10a88"
 CARID[2]="1f9c1ee6-b72d-4f90-b811-a931fb85674b"
 CARID[3]="9c6947d3-239d-473a-b5cf-0ac70b389d51"
-CARID[4]="0b1ddf5e-3094-46f6-a172-33ce342ee463"
 
 
 if [ ! -e ${OUTPUT} ]
@@ -25,6 +24,6 @@ do
 		echo ${TSTAMP}, ${CARID[$index]}, $TIMING
 		echo ${TSTAMP}, ${CARID[$index]}, $TIMING >> ${OUTPUT}
 	done
-	sleep 5
+	sleep 3
 done
 
