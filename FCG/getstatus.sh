@@ -32,10 +32,12 @@ then
 	echo "Timestamp, CarId, HTTPResponse, time_namelookup, time_connect, time_appconnect, time_pretransfer, time_redirect, time_starttransfer, time_total" > ${OUTPUT}
 fi
 
+BEARER=`cat bearer.txt`
+
 run_curl() {
 	url=$1
 	TSTAMP=`date +%s`
-	TIMING=`curl -s -o /dev/null -w "@curl-format.txt" -H "accept: application/json" -H 'Cache-Control: no-cache' -X GET -H "Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2MWM5MTg1LTdiMDEtNGNkYS05Y2QzLTllM2ExMDllNjJjZiIsImVtYWlsIjoicnViZW5AazIuY29tIiwiY291bnRyeSI6IkFSIiwiZ3JvdXBzIjpbImNhcnMuYXIiLCJoaXN0b3J5LmFyIiwiY21zLmFyIiwiZHJpdmVyLmFyIiwiaW5zcGVjdG9yLmFyLnN1cGVydmlzb3IiLCJjcm0uYXIiLCJ0cnVzdGVkSW5zcGVjdG9yLmFyIiwiZGVhbGVyLmFyLnN1cGVydmlzb3IiLCJjYXJkYXRhLmFyIiwic2FsZXMuYXIuZnVsbEFjY2VzcyIsImluc3BlY3Rpb25BcHByb3Zlci5hciIsInVzZXJtYW5hZ2VyLmFyIiwibG9jYXRpb25tYW5hZ2VyLmFyIiwiYXVjdGlvbmVlci5hciIsImluc3BlY3Rvci5BUi52aWV3ZXIiLCJpbnNwZWN0b3IuYXIiLCJpbnNwZWN0aW9uQXBwb2ludG1lbnQuYXIiLCJpbnNwZWN0b3IuYXIucWNvbmx5IiwiaW5zcGVjdGlvbkV4cG9ydC5hciJdLCJwbGFjZXMiOm51bGwsInN0YXR1cyI6ImFjdGl2ZSIsImV4dGVuZHMiOnt9LCJpYXQiOjE1OTUyNTM1MjEsImV4cCI6MTU5NTI4MjMyMSwiaXNzIjoiRnJvbnRpZXIgQ2FyIEdyb3VwIn0.t2RaRl_bi_3au9USK2gPMyPmgHAcS2tohVA2speY2nmun3iaZu0_FpDf3OXlgCYU_sZECtXowEf079y3H_XpHg" ${url}`
+	TIMING=`curl -s -o /dev/null -w "@curl-format.txt" -H "accept: application/json" -H 'Cache-Control: no-cache' -X GET -H "Authorization: Bearer ${BEARER}" ${url}`
 	echo ${TSTAMP}, ${url}, $TIMING >> ${OUTPUT}
 }
 
