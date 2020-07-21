@@ -47,6 +47,6 @@ do
 	do
 		run_curl "${URL[$index]}" &
 	done
-	sleep $(( $RANDOM % 120 + 30 ))
+	sleep $(( $RANDOM % 30 + 10 ))
 done
 
