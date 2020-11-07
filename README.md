@@ -14,7 +14,7 @@ How i install this:
 python3.7 -m virtualenv -p python3.7 plotting
 cd plotting/
 source bin/activate
-python -m pip install jupyter pandas matplotlib numpy lxml folium
+python -m pip install jupyter pandas matplotlib numpy lxml folium geopandas geojson
 ```
 
 
