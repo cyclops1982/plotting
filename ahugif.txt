@@ -1,0 +1,105 @@
+fig, ax = plt.subplots()
+ax.set_xlim([datetime.date(2020, 9, 1), datetime.date(2020, 11, 7)])
+
+xdata1, ydata1 = [], []
+xdata2, ydata2 = [], []
+ln, = plt.plot([], [], '.-', label="Week-on-week growth rate of daily positive tests")
+ln1, = plt.plot([], [], color='grey')
+ln2, = plt.plot([], [], ':', color='grey')
+ax.axhline(0, color='black')
+
+def init():
+    ax.set_xlim([datetime.date(2020, 9, 1), datetime.date(2020, 11, 7)])
+    ax.set_ylim(-100, 80)
+    ax.tick_params('x', labelrotation=23)
+    ax.set_ylabel("%")
+    ax.grid()
+    return ln,
+
+def update(start):
+    print(start)
+    data=pandas.read_csv("/home/ahu/analysis/rivm/COVID-19_casus_landelijk-2020-"+str(start.month).zfill(2)+"-"+str(start.day).zfill(2)+"-14.csv", sep=';')
+    data["timestamp"]=pandas.to_datetime(data["Date_statistics"],infer_datetime_format=True)
+
+    data.set_index("timestamp", inplace=True)
+    tot=data.groupby(["timestamp"]).count()
+    tot=tot.reset_index()
+
+    rol=tot.Sex.rolling(7, center=True)
+    ax.set_title("Dutch week on week growth percentage (date of symptom onset) until 2020-10-"+str(start).zfill(2)+"\nBased on 7-day smoothed daily positive tests")
+    xdata=tot.timestamp
+    ydata=100.0*((1+rol.mean().diff()/rol.mean())**7-1)
+    ln.set_data(xdata, ydata)
+
+    ##############
+    start -= datetime.timedelta(days=1)
+
+    if(start == datetime.date(2020,10,23)):
+        start -= datetime.timedelta(days=1)
+    
+    data=pandas.read_csv("/home/ahu/analysis/rivm/COVID-19_casus_landelijk-2020-"+str(start.month).zfill(2)+"-"+str(start.day).zfill(2)+"-14.csv", sep=';')
+    
+    data["timestamp"]=pandas.to_datetime(data["Date_statistics"],infer_datetime_format=True)
+
+    data.set_index("timestamp", inplace=True)
+    tot=data.groupby(["timestamp"]).count()
+    tot=tot.reset_index()
+    rol=tot.Sex.rolling(7, center=True)
+    xdata=tot.timestamp
+    ydata=100.0*((1+rol.mean().diff()/rol.mean())**7-1)
+        
+    ln1.set_data(xdata, ydata)
+    
+    ##############
+    
+    ##############
+    start -= datetime.timedelta(days=1)
+
+    if(start == datetime.date(2020,10,23)):
+        start -= datetime.timedelta(days=1)
+    data=pandas.read_csv("/home/ahu/analysis/rivm/COVID-19_casus_landelijk-2020-"+str(start.month).zfill(2)+"-"+str(start.day).zfill(2)+"-14.csv", sep=';')
+    data["timestamp"]=pandas.to_datetime(data["Date_statistics"],infer_datetime_format=True)
+
+    data.set_index("timestamp", inplace=True)
+    tot=data.groupby(["timestamp"]).count()
+    tot=tot.reset_index()
+
+    rol=tot.Sex.rolling(7, center=True)
+    xdata=tot.timestamp
+    ydata=100.0*((1+rol.mean().diff()/rol.mean())**7-1)
+    
+    ln2.set_data(xdata, ydata)
+    
+    ##############
+    
+    
+    return ln,
+
+leframes=[datetime.date(2020,10,16),
+          datetime.date(2020,10,17),
+          datetime.date(2020,10,18),
+          datetime.date(2020,10,19),
+          datetime.date(2020,10,20),
+          datetime.date(2020,10,21),
+          datetime.date(2020,10,22),
+          datetime.date(2020,10,24),
+          datetime.date(2020,10,25),
+          datetime.date(2020,10,26),
+          datetime.date(2020,10,27),
+          datetime.date(2020,10,28),
+          datetime.date(2020,10,29),
+          datetime.date(2020,10,30),
+          datetime.date(2020,10,31),
+          datetime.date(2020,11,1),
+         datetime.date(2020,11,2),
+         datetime.date(2020,11,3),
+         datetime.date(2020,11,4),
+         datetime.date(2020,11,5)]        
+print(leframes)
+    
+    
+ani = FuncAnimation(fig, update, frames=leframes,
+                    init_func=init, blit=False)
+plt.legend()
+plt.show()
+ani.save('animation.gif', writer='imagemagick', fps=1.5)
