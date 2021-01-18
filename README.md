@@ -14,7 +14,7 @@ How i install this:
 python3.7 -m virtualenv -p python3.7 plotting
 cd plotting/
 source bin/activate
-python -m pip install jupyter pandas matplotlib numpy lxml folium geopandas geojson
+python -m pip install jupyter pandas matplotlib numpy lxml folium geopandas geojson diagrams
 ```
 
 
@@ -26,3 +26,11 @@ pingstats is a silly little script + jupyter notebook that creates a ping graph.
 ### drayteksnr
 The draytek vigor 130 modem that i have shows some statistics on it's main page about the DSL line. Primarily the SNR is interesting here. I wanted to graph this and made a script to parse the page and store it as CSV.
 The script requires a SESSION KEY parameter which is a cookie that you get when you login. Use your browser debug tools to check out that header.
+
+### Other stuff :)
+
+
+## What we're using
+
+- https://diagrams.mingrammer.com/
+- http://python-visualization.github.io/folium/
